@@ -51,17 +51,15 @@
                 @foreach (Mummy m in Model.Burials)
                 {
                     <a asp-action="BurialDetails" asp-controller="Home" asp-route-burialId="@m.Id" class="list-group-item list-group-item-action p-4">
-
                         <div class="row">
                             <div class="col-4">@m.Id</div>
                             <div class="col-4">@m.Squarenorthsouth @m.Northsouth @m.Squareeastwest @m.Eastwest @m.Area</div>
-                            <div class="col-2">@(!string.IsNullOrEmpty(m.Ageatdeath) ? Model.formValues.ages[m.Ageatdeath] : "")</div>
-                            <div class="col-2">@(!string.IsNullOrEmpty(m.Sex) ? Model.formValues.sexes[m.Sex] : "")</div>
+                            <div class="col-2">@m.Ageatdeath</div>
+                            <div class="col-2">@m.Sex</div>
                         </div>
                         <div class="row">
                             @m.Textileid
                         </div>
-
                     </a>
                 }
             </div>
@@ -109,7 +107,8 @@
                                            id="Squarenorthsouth"
                                            asp-for="Squarenorthsouth"
                                            name="Squarenorthsouth"
-                                           value="@FilterSettings.Squarenorthsouth">
+                                           value="@Model.filterSettings.Squarenorthsouth">
+
                                     <datalist id="northSouthOptions">
                                         @for (int i = 0; i <= 500; i = i + 10)
                                         {
@@ -123,7 +122,9 @@
                                         <option value=""></option>
                                         @for (int i = 0; i < 2; i++)
                                         {
-                                            @if (Model.formValues.directions[i] == FilterSettings.Northsouth)
+
+                                            @if (Model.formValues.directions[i] == Model.filterSettings.Northsouth)
+
                                             {
                                                 <option value="@Model.formValues.directions[i]" selected>@Model.formValues.directions[i]</option>
                                             }
@@ -141,7 +142,9 @@
                                            id="Squareeastwest"
                                            asp-for="Squareeastwest"
                                            name="Squareeastwest"
-                                           value="@FilterSettings.Squareeastwest">
+
+                                           value="@Model.filterSettings.Squareeastwest">
+
                                     <datalist id="eastWestOptions">
                                         @for (int i = 0; i <= 500; i = i + 10)
                                         {
@@ -155,7 +158,8 @@
                                         <option value=""></option>
                                         @for (int i = 2; i < 4; i++)
                                         {
-                                            @if (Model.formValues.directions[i] == FilterSettings.Eastwest)
+                                            @if (Model.formValues.directions[i] == Model.filterSettings.Eastwest)
+
                                             {
                                                 <option value="@Model.formValues.directions[i]" selected>@Model.formValues.directions[i]</option>
                                             }
@@ -175,7 +179,7 @@
                                         <option value=""></option>
                                         @for (int i = 0; i < Model.formValues.areas.Count(); i++)
                                         {
-                                            @if (Model.formValues.areas[i] == FilterSettings.Area)
+                                            @if (Model.formValues.areas[i] == Model.filterSettings.Area)
                                             {
                                                 <option value="@Model.formValues.areas[i]" selected>@Model.formValues.areas[i]</option>
                                             }
@@ -192,7 +196,7 @@
                                         <option value="">All</option>
                                         @for (Double depth = 0.0; depth < 5.0; depth = depth + 0.5)
                                         {
-                                            @if (depth.ToString() == FilterSettings.Depth)
+                                            @if (depth.ToString() == Model.filterSettings.Depth)
                                             {
                                                 <option value="@(depth)" selected>@depth - @(depth + 0.49)</option>
                                             }
@@ -200,7 +204,6 @@
                                             {
                                                 <option value="@(depth)">@depth - @(depth + 0.49)</option>
                                             }
-
                                         }
                                     </select>
                                 </div>
@@ -221,7 +224,7 @@
                                         <option value="">All</option>
                                         @foreach (KeyValuePair<string, string> item in Model.formValues.ages)
                                         {
-                                            @if (item.Key == FilterSettings.Ageatdeath)
+                                            @if (item.Key == Model.filterSettings.Ageatdeath)
                                             {
                                                 <option value="@item.Key" selected>@item.Value</option>
                                             }
@@ -238,7 +241,7 @@
                                         <option value="">All</option>
                                         @foreach (KeyValuePair<string, string> sex in Model.formValues.sexes)
                                         {
-                                            @if (sex.Key == FilterSettings.Sex)
+                                            @if (sex.Key == Model.filterSettings.Sex)
                                             {
                                                 <option value="@sex.Key" selected>@sex.Value</option>
                                             }
@@ -258,13 +261,14 @@
                                         <option value="">All</option>
                                         @foreach (KeyValuePair<string, string> color in Model.formValues.hairColors)
                                         {
-                                            @if (color.Key == FilterSettings.Haircolor)
+                                            @if (color.Key == Model.filterSettings.Haircolor)
                                             {
                                                 <option value="@color.Key" selected>@color.Value</option>
                                             }
                                             else
                                             {
                                                 <option value="@color.Key">@color.Value</option>
+
                                             }
                                         }
                                     </select>
@@ -275,13 +279,14 @@
                                         <option value="">All</option>
                                         @foreach (KeyValuePair<string, string> wrap in Model.formValues.wrapping)
                                         {
-                                            @if (wrap.Key == FilterSettings.Sex)
+                                            @if (wrap.Key == Model.filterSettings.Sex)
                                             {
                                                 <option value="@wrap.Key" selected>@wrap.Value</option>
                                             }
                                             else
                                             {
                                                 <option value="@wrap.Key">@wrap.Value</option>
+
 
                                             }
                                         }
