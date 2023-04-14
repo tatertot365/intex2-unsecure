@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -44,6 +45,23 @@ namespace Mummies.Models
         public virtual DbSet<TextilefunctionTextile> TextilefunctionTextiles { get; set; } = null!;
         public virtual DbSet<Yarnmanipulation> Yarnmanipulations { get; set; } = null!;
         public virtual DbSet<YarnmanipulationTextile> YarnmanipulationTextiles { get; set; } = null!;
+
+        public static IQueryable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(
+        IQueryable<TOuter> outer,
+        IQueryable<TInner> inner,
+        Expression<Func<TOuter, TKey>> outerKeySelector,
+        Expression<Func<TInner, TKey>> innerKeySelector,
+        Func<TOuter, TInner, TResult> resultSelector)
+        {
+            return outer.GroupJoin(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                (outerObj, innerObjs) => new { outerObj, innerObjs })
+                .SelectMany(
+                x => x.innerObjs.DefaultIfEmpty(),
+                (x, innerObj) => resultSelector(x.outerObj, innerObj));
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

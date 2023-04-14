@@ -11,8 +11,6 @@ namespace Mummies.Models.ViewModels
 
 		public PageInfo pageInfo { get; set; }
 
-        public FilterSettings filterSettings { get; set; }
-
         public FormValues formValues { get; set; }
 
         public string? Squarenorthsouth { get; set; }

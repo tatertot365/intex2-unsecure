@@ -19,49 +19,28 @@ namespace mummies.Models;
 
         public IQueryable<Mummy> GetBurials(Dictionary<string, string?>? burialParams = null)
         {
-        var query = mummyContext.Burialmains
-            //.Join(
-            //mummyContext.BurialmainBodyanalysischarts,
-            //bm => bm.Id,
-            //bm_ba => bm_ba.MainBurialmainid,
-            //(bm, bm_ba) => new { bm, bm_ba })
-            .Select(x => new Mummy
-            {
-                Id = x.Id,
-                Ageatdeath = x.Ageatdeath,
-                Haircolor = x.Haircolor,
-                Sex = x.Sex,
-                Wrapping = x.Wrapping,
-                Depth = x.Depth,
-                Northsouth = x.Northsouth,
-                Squarenorthsouth = x.Squarenorthsouth,
-                Eastwest = x.Eastwest,
-                Squareeastwest = x.Squareeastwest
-            });
 
-        //.Join(
-        //    mummyContext.BurialmainTextiles,
-        //    bm => bm.Id,
-        //    bt => bt.MainBurialmainid,
-        //    (bm, bt) => new { bm, bt })
-        //.Join(
-        //    mummyContext.Textiles,
-        //    b => b.bt.MainTextileid,
-        //    t => t.Id,
-        //    (b, t) => new { b, t })
-        //.Join(
-        //    mummyContext.ColorTextiles,
-        //    t => t.t.Id,
-        //    c => c.MainTextileid,
-        //    (t, c) => new { t, c})
-
+                    var query = mummyContext.Burialmains.Select(x => new Mummy
+                    {
+                        Id = x.Id,
+                        Ageatdeath = x.Ageatdeath,
+                        Haircolor = x.Haircolor,
+                        Sex = x.Sex,
+                        Wrapping = x.Wrapping,
+                        Depth = x.Depth,
+                        Northsouth = x.Northsouth,
+                        Squarenorthsouth = x.Squarenorthsouth,
+                        Eastwest = x.Eastwest,
+                        Squareeastwest = x.Squareeastwest,
+                        Area = x.Area
+                    });
+                    
         if (burialParams != null) // Check if a dictionary was passed in. If not,
                                       // the user only navigated to the page, not filtered
             {
                 query = !string.IsNullOrEmpty(burialParams?["Ageatdeath"])
-                ? query.Where(a => a.Ageatdeath == burialParams["Ageatdeath"])
-                : query;
-
+                    ? query.Where(a => a.Ageatdeath == burialParams["Ageatdeath"])
+                    : query;
                 query = !string.IsNullOrEmpty(burialParams?["Haircolor"])
                     ? query.Where(h => h.Haircolor == burialParams["Haircolor"])
                     : query;
@@ -103,8 +82,9 @@ namespace mummies.Models;
                 query = !string.IsNullOrEmpty(burialParams["Area"])
                     ? query.Where(a => a.Area == burialParams["Area"])
                     : query;
-            }
-
+        }
+            
             return query.AsNoTracking();
+
         }
     }

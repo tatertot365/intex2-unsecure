@@ -1,18 +1,32 @@
 ﻿using System;
 namespace Mummies.Models.ViewModels
 {
-	public class FilterSettings
+	public static class FilterSettings
 	{
-		public string? Ageatdeath { get; set; }
-		public string? Haircolor { get; set; }
-		public string? Sex { get; set; }
-		public string? Wrapping { get; set; }
-		public string? Depth { get; set; }
-        public string? Northsouth { get; set; }
-		public string? Squarenorthsouth { get; set; }
-		public string? Eastwest { get; set; }
-		public string? Squareeastwest { get; set; }
-		public string? Area { get; set; }
+		public static string Ageatdeath { get; set; }
+		public static string Haircolor { get; set; }
+		public static string Sex { get; set; }
+		public static string Wrapping { get; set; }
+		public static string Depth { get; set; }
+        public static string Northsouth { get; set; }
+		public static string Squarenorthsouth { get; set; }
+		public static string Eastwest { get; set; }
+		public static string Squareeastwest { get; set; }
+		public static string Area { get; set; }
+
+		static FilterSettings()
+		{
+            Ageatdeath  = "";
+            Haircolor  = "";
+            Sex  = "";
+            Wrapping  = "";
+            Depth  = "";
+            Northsouth  = "";
+            Squarenorthsouth  = "";
+            Eastwest  = "";
+            Squareeastwest  = "";
+            Area  = "";
+    }
     }
 }
 

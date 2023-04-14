@@ -64,7 +64,7 @@ namespace mummies.Controllers
             //ViewBag.isAdmin = await _userManager.IsInRoleAsync(currentUser, "Admin");
 
 
-            IQueryable<Mummy> mummyQueryable = repo.GetBurials(); // Get empty filtering
+            IQueryable<Mummy> mummyQueryable = repo.GetBurials(new Dictionary<string, string?> { { "Ageatdeath", FilterSettings.Ageatdeath }, { "Haircolor", FilterSettings.Haircolor }, { "Sex", FilterSettings.Sex }, { "Wrapping", FilterSettings.Wrapping }, { "Depth", FilterSettings.Depth }, { "Northsouth", FilterSettings.Northsouth }, { "Eastwest", FilterSettings.Eastwest }, { "Squarenorthsouth", FilterSettings.Squarenorthsouth }, { "Squareeastwest", FilterSettings.Squareeastwest }, { "Area", FilterSettings.Squareeastwest } });
 
             var x = new BurialsViewModel
             {
@@ -80,8 +80,6 @@ namespace mummies.Controllers
                 },
 
                 Mummies = mummyQueryable.ToList(),
-
-                filterSettings = new FilterSettings(),
 
                 formValues = new FormValues()
             };
@@ -104,6 +102,17 @@ namespace mummies.Controllers
             int pageSize = 30;
             IQueryable<Mummy> mummyQueryable = repo.GetBurials(new Dictionary<string, string?> { { "Ageatdeath", Request.Form["Ageatdeath"] }, { "Haircolor", Request.Form["Haircolor"] }, { "Sex", Request.Form["Sex"] }, { "Wrapping", Request.Form["Wrapping"] }, { "Depth", Request.Form["Depth"] }, { "Northsouth", Request.Form["Northsouth"] }, { "Eastwest", Request.Form["Eastwest"] }, { "Squarenorthsouth", Request.Form["Squarenorthsouth"] }, { "Squareeastwest", Request.Form["Squareeastwest"] }, { "Area", Request.Form["Area"] } });
 
+            FilterSettings.Ageatdeath = Request.Form["Ageatdeath"];
+            FilterSettings.Haircolor = Request.Form["Haircolor"];
+            FilterSettings.Sex = Request.Form["Sex"];
+            FilterSettings.Wrapping = Request.Form["Wrapping"];
+            FilterSettings.Depth = Request.Form["Depth"];
+            FilterSettings.Northsouth = Request.Form["Northsouth"];
+            FilterSettings.Squarenorthsouth = Request.Form["Squarenorthsouth"];
+            FilterSettings.Eastwest = Request.Form["Eastwest"];
+            FilterSettings.Squareeastwest = Request.Form["Squareeastwest"];
+            FilterSettings.Area = Request.Form["Area"];
+
             var x = new BurialsViewModel
             {
                 Burials = mummyQueryable
@@ -118,20 +127,6 @@ namespace mummies.Controllers
                 },
 
                 Mummies = mummyQueryable.ToList(),
-
-                filterSettings = new FilterSettings
-                {
-                    Ageatdeath = Request.Form["Ageatdeath"],
-                    Haircolor = Request.Form["Haircolor"],
-                    Sex = Request.Form["Sex"],
-                    Wrapping = Request.Form["Wrapping"],
-                    Depth = Request.Form["Depth"],
-                    Northsouth = Request.Form["Northsouth"],
-                    Squarenorthsouth = Request.Form["Squarenorthsouth"],
-                    Eastwest = Request.Form["Eastwest"],
-                    Squareeastwest = Request.Form["Squareeastwest"],
-                    Area = Request.Form["Area"]
-                },
 
                 formValues = new FormValues()
             };
