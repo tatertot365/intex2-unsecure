@@ -1,5 +1,5 @@
 ﻿using System;
-namespace WebApplication1.Models.ViewModels
+namespace Mummies.Models.ViewModels
 {
 	public class FormValues
 	{

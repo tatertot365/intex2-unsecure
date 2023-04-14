@@ -1,9 +1,10 @@
 ﻿using System;
-using WebApplication1.Models;
-using WebApplication1.Models.ViewModels;
+using Mummies.Models;
+using Mummies.Models.ViewModels;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication1.Models;
+namespace mummies.Models;
 
     public class EFMummyRepository : IMummyRepository
     {
@@ -14,32 +15,32 @@ namespace WebApplication1.Models;
             mummyContext = temp;
         }
 
-        public IQueryable<Burialmain> WebApplication1 => mummyContext.Burialmains;
+        public IQueryable<Burialmain> Mummies => mummyContext.Burialmains;
 
         public IQueryable<Mummy> GetBurials(Dictionary<string, string?>? burialParams = null)
         {
-            var query = mummyContext.Burialmains.Select(x => new Mummy
-            {
-                Id = x.Id,
-                Ageatdeath = x.Ageatdeath,
-                Haircolor = x.Haircolor,
-                Sex = x.Sex,
-                Wrapping = x.Wrapping,
-                Depth = x.Depth,
-                Northsouth = x.Northsouth,
-                Squarenorthsouth = x.Squarenorthsouth,
-                Eastwest = x.Eastwest,
-                Squareeastwest = x.Squareeastwest,
-                Area = x.Area
-            });
 
-            if (burialParams != null) // Check if a dictionary was passed in. If not,
+                    var query = mummyContext.Burialmains.Select(x => new Mummy
+                    {
+                        Id = x.Id,
+                        Ageatdeath = x.Ageatdeath,
+                        Haircolor = x.Haircolor,
+                        Sex = x.Sex,
+                        Wrapping = x.Wrapping,
+                        Depth = x.Depth,
+                        Northsouth = x.Northsouth,
+                        Squarenorthsouth = x.Squarenorthsouth,
+                        Eastwest = x.Eastwest,
+                        Squareeastwest = x.Squareeastwest,
+                        Area = x.Area
+                    });
+                    
+        if (burialParams != null) // Check if a dictionary was passed in. If not,
                                       // the user only navigated to the page, not filtered
             {
                 query = !string.IsNullOrEmpty(burialParams?["Ageatdeath"])
-                ? query.Where(a => a.Ageatdeath == burialParams["Ageatdeath"])
-                : query;
-
+                    ? query.Where(a => a.Ageatdeath == burialParams["Ageatdeath"])
+                    : query;
                 query = !string.IsNullOrEmpty(burialParams?["Haircolor"])
                     ? query.Where(h => h.Haircolor == burialParams["Haircolor"])
                     : query;
@@ -81,8 +82,9 @@ namespace WebApplication1.Models;
                 query = !string.IsNullOrEmpty(burialParams["Area"])
                     ? query.Where(a => a.Area == burialParams["Area"])
                     : query;
-            }
+        }
+            
+            return query.AsNoTracking();
 
-            return query;
         }
     }

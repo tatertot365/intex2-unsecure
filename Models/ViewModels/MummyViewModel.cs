@@ -1,6 +1,6 @@
-﻿using WebApplication1.Models;
+﻿using Mummies.Models;
 
-namespace WebApplication1.Models.ViewModels
+namespace mummies.Models.ViewModels
 {
     public class MummyViewModel
     {
@@ -13,7 +13,5 @@ namespace WebApplication1.Models.ViewModels
         public IQueryable<Structure> structures { get; set; }
         public IQueryable<ColorTextile> colorTextiles { get; set; } 
         public IQueryable<Color> colors { get; set; }
-
-        
     }
 }

@@ -3,7 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "WebApplication1";
+    ViewData["Title"] = "Mummies";
 }
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -51,7 +51,6 @@
                 @foreach (Mummy m in Model.Burials)
                 {
                     <a asp-action="BurialDetails" asp-controller="Home" asp-route-burialId="@m.Id" class="list-group-item list-group-item-action p-4">
-
                         <div class="row">
                             <div class="col-4">@m.Id</div>
                             <div class="col-4">@m.Squarenorthsouth @m.Northsouth @m.Squareeastwest @m.Eastwest @m.Area</div>
@@ -109,6 +108,7 @@
                                            asp-for="Squarenorthsouth"
                                            name="Squarenorthsouth"
                                            value="@Model.filterSettings.Squarenorthsouth">
+
                                     <datalist id="northSouthOptions">
                                         @for (int i = 0; i <= 500; i = i + 10)
                                         {
@@ -122,7 +122,9 @@
                                         <option value=""></option>
                                         @for (int i = 0; i < 2; i++)
                                         {
+
                                             @if (Model.formValues.directions[i] == Model.filterSettings.Northsouth)
+
                                             {
                                                 <option value="@Model.formValues.directions[i]" selected>@Model.formValues.directions[i]</option>
                                             }
@@ -140,7 +142,9 @@
                                            id="Squareeastwest"
                                            asp-for="Squareeastwest"
                                            name="Squareeastwest"
+
                                            value="@Model.filterSettings.Squareeastwest">
+
                                     <datalist id="eastWestOptions">
                                         @for (int i = 0; i <= 500; i = i + 10)
                                         {
@@ -155,6 +159,7 @@
                                         @for (int i = 2; i < 4; i++)
                                         {
                                             @if (Model.formValues.directions[i] == Model.filterSettings.Eastwest)
+
                                             {
                                                 <option value="@Model.formValues.directions[i]" selected>@Model.formValues.directions[i]</option>
                                             }
@@ -199,7 +204,6 @@
                                             {
                                                 <option value="@(depth)">@depth - @(depth + 0.49)</option>
                                             }
-
                                         }
                                     </select>
                                 </div>
@@ -264,6 +268,7 @@
                                             else
                                             {
                                                 <option value="@color.Key">@color.Value</option>
+
                                             }
                                         }
                                     </select>
@@ -281,6 +286,7 @@
                                             else
                                             {
                                                 <option value="@wrap.Key">@wrap.Value</option>
+
 
                                             }
                                         }
