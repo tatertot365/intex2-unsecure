@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplication1.Models
+namespace Mummies.Models
 {
     [Table("burialmain")]
     public class Burialmain

@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Models;
-using WebApplication1.Data;
-using WebApplication1.Models;
+using mummies.Models;
+using Mummies.Models;
 
 using System.Linq;
-using WebApplication1.Models.ViewModels;
-using WebApplication1.Models.ViewModels;
+using mummies.Models.ViewModels;
+using Mummies.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
@@ -16,8 +15,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SendGrid;
 using Newtonsoft.Json.Linq;
+using WebApplication1.Data;
 
-namespace WebApplication1.Controllers
+namespace mummies.Controllers
 {
 
     public class HomeController : Controller
@@ -63,8 +63,9 @@ namespace WebApplication1.Controllers
             // Check if the user is in the "Admin" role
             //ViewBag.isAdmin = await _userManager.IsInRoleAsync(currentUser, "Admin");
 
+
             IQueryable<Mummy> mummyQueryable = repo.GetBurials(); // Get empty filtering
-            
+
             var x = new BurialsViewModel
             {
                 Burials = mummyQueryable
@@ -78,7 +79,7 @@ namespace WebApplication1.Controllers
                     currentPage = pageNum
                 },
 
-                WebApplication1 = mummyQueryable.ToList(),
+                Mummies = mummyQueryable.ToList(),
 
                 filterSettings = new FilterSettings(),
 
@@ -116,7 +117,7 @@ namespace WebApplication1.Controllers
                     currentPage = pageNum
                 },
 
-                WebApplication1 = mummyQueryable.ToList(),
+                Mummies = mummyQueryable.ToList(),
 
                 filterSettings = new FilterSettings
                 {

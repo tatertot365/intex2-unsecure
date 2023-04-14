@@ -1,13 +1,13 @@
-﻿using WebApplication1.Models;
-using WebApplication1.Models.ViewModels;
+﻿using Mummies.Models;
+using Mummies.Models.ViewModels;
 using System;
-namespace WebApplication1.Models.ViewModels
+namespace Mummies.Models.ViewModels
 {
 	public class BurialsViewModel
 	{
 		public IQueryable<Mummy> Burials { get; set; }
 
-        public List<Mummy> WebApplication1 { get; set; }
+        public List<Mummy> Mummies { get; set; }
 
 		public PageInfo pageInfo { get; set; }
 

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace WebApplication1.Areas.Identity.Pages.Account.Manage
+namespace Mummies.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
