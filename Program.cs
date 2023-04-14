@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using WebApplication1.Data;
-using WebApplication1.Models;
 using System.Net;
-
+using Mummies.Models;
+using mummies.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -25,6 +24,12 @@ services.AddScoped<IMummyRepository, EFMummyRepository>();
 
 services.AddDatabaseDeveloperPageExceptionFilter();
 
+//services.AddAuthentication().AddGoogle(googleOptions =>
+//{
+//    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+//    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+//});
+
 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -38,7 +43,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 12;
+    options.Password.RequiredLength = 10;
     options.Password.RequiredUniqueChars = 0;
 
     // Lockout settings.
@@ -63,6 +68,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+//// Http to Https Redirection
+//builder.Services.AddHttpsRedirection(options =>
+//{
+//    options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+//    options.HttpsPort = 443;
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -84,7 +96,6 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");

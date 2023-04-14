@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace WebApplication1.Models
+namespace Mummies.Models
 {
     public partial class MummyDbContext : DbContext
     {

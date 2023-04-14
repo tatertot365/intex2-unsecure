@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication1.Models.ViewModels
+namespace mummies.Models.ViewModels
 {
     public class HeadDirectionModel
     {
