@@ -1,5 +1,5 @@
 ﻿using System;
-namespace WebApplication1.Models.ViewModels
+namespace Mummies.Models.ViewModels
 {
 	public class Mummy
 	{
@@ -25,7 +25,7 @@ namespace WebApplication1.Models.ViewModels
         public double? Estimatestature { get; set; }
 
         // Textile Info
-        public int? Textileid { get; set; }
+        public long? Textileid { get; set; }
         public string? TextileDescription { get; set; }
         public string? TextileFunction { get; set; }
         public string? TextileColor { get; set; }

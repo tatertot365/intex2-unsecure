@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplication1.Models
+namespace Mummies.Models
 {
     public partial class Bodyanalysischart
     {
